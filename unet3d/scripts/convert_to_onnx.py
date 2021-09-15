@@ -14,3 +14,6 @@ if __name__ == "__main__":
     parser.add_argument("--model_filename", type=str, help="Fichero que contiene el modelo guardado que queremos convertir", required=True)
     parser.add_argument("--converted_filename", type=str,
                         help="Fichero que contiene el modelo convertido a formato ONNX", required=True)
+
+    args = parser.parse_args()
+    convert(args)
