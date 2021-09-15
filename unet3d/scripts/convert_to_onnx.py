@@ -16,8 +16,10 @@ def convert(args):
         num_outputs = config['n_outputs']
     else:
         num_outputs = len(np.concatenate(config['metric_names']))
+
+    activation = config['model_kwargs']['activation']
     model = build_model(model_name, input_shape=input_shape, num_outputs=num_outputs,
-                            activation=config['activation'])
+                            activation=activation)
     #model = load_model(args.model_filename)
     model.load_weights(args.model_filename)
     # Se guarda en formato ProtoBuffer
