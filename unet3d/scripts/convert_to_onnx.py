@@ -5,7 +5,7 @@ from unet3d.models.keras.load import load_model
 def convert(args):
     model = load_model(args.model_filename)
     # Se guarda en formato ProtoBuffer
-    model.save('./savedModel/optimized/', save_format="tf")
+    model.save('./', save_format="tf")
     onnx_model = keras2onnx.convert_keras(model, name="3DUNet", channel_first_inputs=args.channel_first_inputs)
     #fp = open(args.converted_filename, "wb")
     #keras2onnx.save_model(onnx_model, fp)
