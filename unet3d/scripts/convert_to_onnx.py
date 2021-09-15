@@ -5,7 +5,7 @@ import numpy as np
 from unet3d.models.pytorch.build import build_or_load_model
 
 def convert(args):
-    dummy_input = torch.randn(256, 256, 256, device='cuda', type=float)
+    dummy_input = torch.randn(256, 256, 256, device='cuda')
     fp_json = open(args.config)
     config = json.load(fp=fp_json)      # Devuelve un diccionario
     model_name = config['model_name']
