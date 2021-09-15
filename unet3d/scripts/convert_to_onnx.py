@@ -1,15 +1,15 @@
-import keras2onnx
+import torch
 import argparse
-from unet3d.models.keras.load import load_model
-from unet3d.models.keras.build import build_model
 import json
 import numpy as np
+from unet3d.models.pytorch.build import build_or_load_model
 
 def convert(args):
-
+    dummy_input = torch.randn(256, 256, 256, device='cuda', type=float)
     fp_json = open(args.config)
     config = json.load(fp=fp_json)      # Devuelve un diccionario
     model_name = config['model_name']
+    n_features = config['n_features']
     window = np.asarray(config['window'])
     input_shape = tuple(window.tolist() + [config['n_features']])
     if "n_outputs" in config:
@@ -17,18 +17,15 @@ def convert(args):
     else:
         num_outputs = len(np.concatenate(config['metric_names']))
 
-    activation = config['model_kwargs']['activation']
-    model = build_model(model_name, input_shape=input_shape, num_outputs=num_outputs,
-                            activation=activation)
-    #model = load_model(args.model_filename)
-    model.load_weights(args.model_filename)
-    # Se guarda en formato ProtoBuffer
-    model.save('./', save_format="tf")
-    onnx_model = keras2onnx.convert_keras(model, name="3DUNet", channel_first_inputs=args.channel_first_inputs)
-    #fp = open(args.converted_filename, "wb")
-    #keras2onnx.save_model(onnx_model, fp)
-    #fp.close()
-    #model = build_model(model_name, input_shape=input_shape, num_outputs=num_outputs,  activation=config['activation'])
+    model_kwargs = config['model_kwargs']
+
+    model = build_or_load_model(model_name=model_name, model_filename=args.model_filename, n_outputs=num_outputs,
+                                n_features=n_features, n_gpus=1, strict=True, **model_kwargs)
+
+    torch.onnx.export(model, dummy_input, "model.onnx", verbose=True, input_names="encoder.layers.0.blocks.0.conv1.norm1",
+                      output_names="final_convolution")
+
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
