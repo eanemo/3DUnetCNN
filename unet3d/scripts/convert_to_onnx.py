@@ -22,8 +22,7 @@ def convert(args):
     model = build_or_load_model(model_name=model_name, model_filename=args.model_filename, n_outputs=num_outputs,
                                 n_features=n_features, n_gpus=1, strict=True, **model_kwargs)
 
-    torch.onnx.export(model, dummy_input, "model.onnx", verbose=True, input_names="encoder.layers.0.blocks.0.conv1.norm1",
-                      output_names="final_convolution")
+    torch.onnx.export(model, dummy_input, "model.onnx", verbose=True, input_names=["encoder.layers.0.blocks.0.conv1.norm1"], output_names=["final_convolution"])
 
 
 
