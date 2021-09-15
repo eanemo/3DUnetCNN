@@ -435,6 +435,8 @@ def pytorch_volumetric_predictions(model_filename, model_name, n_features, filen
     import torch
     # from .train.pytorch import load_criterion
     print("**** TORCH --> pytorch_volumetric_predictions ****" )
+    print("n_features", n_features)
+    print("strict_model_loading", strict_model_loading)
 
     model, dataset, basename = load_volumetric_model_and_dataset(model_name, model_filename, model_kwargs, n_outputs,
                                                                  n_features, strict_model_loading, n_gpus, sequence,
