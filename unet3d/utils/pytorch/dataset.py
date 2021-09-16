@@ -66,6 +66,7 @@ class AEDataset(WholeVolumeAutoEncoderSequence, Dataset):
         return len(self.epoch_filenames)
 
     def __getitem__(self, idx):
+        print("AEDataset.__getitem__")
         item = self.epoch_filenames[idx]
         x, y = self.resample_input(item)
         return (torch.from_numpy(np.moveaxis(np.asarray(x), -1, 0)).float(),
@@ -96,6 +97,7 @@ class WholeVolumeSupervisedRegressionDataset(WholeVolumeSupervisedRegressionSequ
         return len(self.epoch_filenames)
 
     def __getitem__(self, idx):
+        print("WholeVolumeSupervisedRegressionDataset.__getitem__")
         item = self.epoch_filenames[idx]
         x, y = self.resample_input(item)
         return (torch.from_numpy(np.moveaxis(np.asarray(x), -1, 0)).float(),
@@ -115,6 +117,7 @@ class WindowedAEDataset(WindowedAutoEncoderSequence, Dataset):
         return len(self.epoch_filenames)
 
     def __getitem__(self, idx):
+        print("WindowedAEDataset.__get__item", idx)
         x, y = self.fetch_hcp_subject_batch(*self.epoch_filenames[idx])
         return (torch.from_numpy(np.moveaxis(np.asarray(x), -1, 1)).float(),
                 torch.from_numpy(np.moveaxis(np.asarray(y), -1, 1)).float())
