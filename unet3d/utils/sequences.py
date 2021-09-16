@@ -487,6 +487,7 @@ class WholeVolumeAutoEncoderSequence(WholeVolumeToSurfaceSequence):
         self.random_permutation_probability = random_permutation_probability
 
     def __getitem__(self, idx):
+        print("WholeVolumeAutoEncoderSequence.__getitem__")
         x_batch = list()
         y_batch = list()
         batch_filenames = self.epoch_filenames[idx * self.batch_size:(idx + 1) * self.batch_size]
@@ -592,6 +593,7 @@ class WholeVolumeSegmentationSequence(WholeVolumeAutoEncoderSequence):
         self.add_contours = add_contours
 
     def resample_input(self, input_filenames):
+        print("WholeVolumeSegmentationSequence.resample_input")
         input_image, target_image = self.resample_image(input_filenames)
         target_data = get_nibabel_data(target_image)
         if self.labels is None:
