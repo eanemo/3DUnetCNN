@@ -81,6 +81,7 @@ class WholeVolumeSegmentationDataset(WholeVolumeSegmentationSequence, Dataset):
 
     def __getitem__(self, idx):
         item = self.epoch_filenames[idx]
+        print("WholeVolumeSegmentationDataset --> ", idx)
         x, y = self.resample_input(item)
         return (torch.from_numpy(np.moveaxis(np.copy(x), -1, 0)).float(),
                 torch.from_numpy(np.moveaxis(np.copy(y), -1, 0)).byte())
