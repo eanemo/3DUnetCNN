@@ -343,7 +343,7 @@ def get_feature_filename_and_subject_id(dataset, idx, verbose=False):
     epoch_filenames = dataset.epoch_filenames[idx]
     x_filename = epoch_filenames[dataset.feature_index]
     if verbose:
-        print("Reading:", x_filename)
+        print("Reading1:", x_filename)
     subject_id = epoch_filenames[-1]
     return x_filename, subject_id
 
@@ -551,7 +551,7 @@ def single_volume_zstat_denoising(model_filename, model_name, n_features, filena
             if x_filename in completed:
                 continue
             if verbose:
-                print("Reading:", x_filename)
+                print("Reading2:", x_filename)
             x_image, ref_image = load_images_from_dataset(dataset, idx, resample_predictions)
             if len(x_image.shape) == 4:
                 volumes_per_image = x_image.shape[3]
