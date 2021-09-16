@@ -74,14 +74,15 @@ class AEDataset(WholeVolumeAutoEncoderSequence, Dataset):
 
 class WholeVolumeSegmentationDataset(WholeVolumeSegmentationSequence, Dataset):
     def __init__(self, *args, batch_size=1, shuffle=False, metric_names=None, **kwargs):
+        print("WholeVolumeSegmentationDataset.__init__")
         super().__init__(*args, batch_size=batch_size, shuffle=shuffle, metric_names=metric_names, **kwargs)
 
     def __len__(self):
         return len(self.epoch_filenames)
 
     def __getitem__(self, idx):
+        print("WholeVolumeSegmentationDataset.__getitem__", idx)
         item = self.epoch_filenames[idx]
-        print("WholeVolumeSegmentationDataset --> ", idx)
         x, y = self.resample_input(item)
         return (torch.from_numpy(np.moveaxis(np.copy(x), -1, 0)).float(),
                 torch.from_numpy(np.moveaxis(np.copy(y), -1, 0)).byte())
