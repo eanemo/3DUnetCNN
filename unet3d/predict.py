@@ -391,7 +391,7 @@ def write_prediction_image_to_file(pred_image, output_template, subject_id, x_fi
 
 def pytorch_predict_batch_array(model, batch, n_gpus=1):
     import torch
-    print(batch.shape)
+    print(np.asarray(batch).shape)
     batch_x = torch.tensor(np.moveaxis(np.asarray(batch), -1, 1)).float()
     print(batch_x.shape)
     pred_x = pytorch_predict_batch(batch_x, model, n_gpus)
