@@ -306,6 +306,7 @@ def load_volumetric_model(model_name, model_filename, n_outputs, n_features, n_g
 def load_volumetric_sequence(sequence, sequence_kwargs, filenames, window, spacing, metric_names, batch_size=1):
     from .utils.pytorch.dataset import AEDataset
     if sequence is None:
+        print("AEDataset")
         sequence = AEDataset
     if sequence_kwargs is None:
         sequence_kwargs = dict()
