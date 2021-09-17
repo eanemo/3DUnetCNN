@@ -463,6 +463,7 @@ def pytorch_volumetric_predictions(model_filename, model_name, n_features, filen
             batch_subjects.append(subject_id)
             batch_filenames.append(x_filename)
             if len(batch) >= batch_size or idx == (len(dataset) - 1):
+                print("Predict batch", np.asarray(batch).shape)
                 predict_volumetric_batch(model=model, batch=batch, batch_references=batch_references,
                                          batch_subjects=batch_subjects, batch_filenames=batch_filenames,
                                          basename=basename, prediction_dir=prediction_dir,
