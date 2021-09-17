@@ -10,6 +10,11 @@
       "train/{subject}_segmentation.nii.gz"
     ]
   },
+  "window": [
+    256,
+    256,
+    256
+  ],
   "n_features": 1,
   "optimizer": "Adam",
   "package": "pytorch",
