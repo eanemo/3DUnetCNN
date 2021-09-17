@@ -2,7 +2,7 @@
   "subjects_filename": "examples/teeth2021/subjects.json",
   "generate_filenames": "templates",
   "generate_filenames_kwargs": {
-    "directory": "C:/Users/NemoDev/Desktop/dataset_segmentacion_raices/nii_v2/",
+    "directory": "C:/Users/NemoDev/Desktop/dataset_segmentacion_raices/nii_v3/",
     "feature_templates": [
       "train/{subject}_cut.nii.gz"
     ],
