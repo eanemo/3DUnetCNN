@@ -332,6 +332,7 @@ def load_volumetric_model_and_dataset(model_name, model_filename, model_kwargs, 
 
 def load_images_from_dataset(dataset, idx, resample_predictions):
     print("load_images_from_dataset", idx, resample_predictions)
+    print("Dataset", type(dataset))
     if resample_predictions:
         x_image, ref_image = dataset.get_feature_image(idx, return_unmodified=True)
     else:
