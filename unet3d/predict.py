@@ -457,6 +457,7 @@ def pytorch_volumetric_predictions(model_filename, model_name, n_features, filen
         for idx in range(len(dataset)):
             x_filename, subject_id = get_feature_filename_and_subject_id(dataset, idx, verbose=verbose)
             x_image, ref_image = load_images_from_dataset(dataset, idx, resample_predictions)
+            print("x_image", x_image)
 
             batch.append(get_nibabel_data(x_image))
             batch_references.append((x_image, ref_image))
