@@ -461,7 +461,8 @@ def pytorch_volumetric_predictions(model_filename, model_name, n_features, filen
             x_image, ref_image = load_images_from_dataset(dataset, idx, resample_predictions)
 
             batch.append(get_nibabel_data(x_image))
-            print("filenames", dataset.epoch_filenames[idx][4])
+            print("Saving", "%d_%s.nii.gz" % (idx, dataset.epoch_filenames[idx][4]))
+            nib.save(x_image, "%d_%s.nii.gz" % (idx, dataset.epoch_filenames[idx][4]))
             batch_references.append((x_image, ref_image))
             batch_subjects.append(subject_id)
             batch_filenames.append(x_filename)
