@@ -1,0 +1,7 @@
+scikit-learn==0.24.2
+onnx==1.10.1
+onnxconverter-common==1.9.0
+keras2onnx==1.9.0
+nibabel==3.2.1
+nilearn==0.8.1
+opencv-python==4.5.3.56
