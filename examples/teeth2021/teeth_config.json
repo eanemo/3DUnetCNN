@@ -41,14 +41,14 @@
     "encoder_blocks": [2, 2, 2, 2, 2],
     "decoder_mirrors_encoder": false,
     "input_shape": [176, 224, 144],
-    "activation": "sigmoid"
+    "activation": "softmax"
   },
   "skip_validation": false,
   "iterations_per_epoch": 1,
   "n_outputs": 1,
   "sequence": "WholeVolumeSegmentationDataset",
   "sequence_kwargs": {
-    "normalization": null,
+    "normalization": "zero_mean",
     "crop": true,
     "cropping_kwargs": null,
     "interpolation": "linear",
