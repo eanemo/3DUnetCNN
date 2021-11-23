@@ -5,3 +5,6 @@ git+https://github.com/onnx/keras-onnx.git
 nibabel==3.2.1
 nilearn==0.8.1
 opencv-python==4.5.3.56
+Keras==2.4.3
+tensorflow==2.4.4
+torch==1.10.0
