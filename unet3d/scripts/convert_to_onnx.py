@@ -29,7 +29,7 @@ def convert(args):
                                 n_features=n_features, n_gpus=1, strict=True, **model_kwargs)
 
     torch.onnx.export(model, dummy_input, "model.onnx", verbose=True, input_names=[
-                      "encoder.layers.0.blocks.0.conv1.norm1"], output_names=["final_convolution"])
+                      args.input], output_names=[args.output])
 
 
 if __name__ == "__main__":
@@ -40,6 +40,8 @@ if __name__ == "__main__":
                         help="Fichero que contiene el modelo guardado que queremos convertir", required=True)
     parser.add_argument("--converted_filename", type=str,
                         help="Fichero que contiene el modelo convertido a formato ONNX", required=True)
+    parser.add_argument("--input", type=str, help="Nombre del nodo de entrada de la red", required=False, default="module.encoder.layers.0.blocks.0.conv1.norm1")
+    parser.add_argument("--output", type=str, help="Nombre del nodo de salida de la red", required=False, default="module.final_convolution")
 
     args = parser.parse_args()
     convert(args)
