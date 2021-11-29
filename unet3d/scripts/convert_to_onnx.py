@@ -49,7 +49,7 @@ if __name__ == "__main__":
                         help="Fichero que contiene el modelo convertido a formato ONNX", required=True)
     parser.add_argument("--input", type=str, help="Nombre del nodo de entrada de la red", required=False, default="module.encoder.layers.0.blocks.0.conv1.norm1")
     parser.add_argument("--output", type=str, help="Nombre del nodo de salida de la red", required=False, default="module.final_convolution")
-    parser.add_argument("--debug", type=bool, action="store_true")
+    parser.add_argument("--debug", action="store_true")
 
     args = parser.parse_args()
     
