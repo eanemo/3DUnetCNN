@@ -458,8 +458,8 @@ def pytorch_volumetric_predictions(model_filename, model_name, n_features, filen
                                                                  metric_names)
     
     print("Converting model to onnx ...")
-    #dummy_input = torch.tensor(torch.randn(1, 1, 176, 224, 144, device='cuda')).float()
-    #torch.onnx.export(model, dummy_input, "exported_model.onnx", verbose=True, input_names=["encoder.layers.0.blocks.0.conv1.norm1"], output_names=["final_convolution"])
+    dummy_input = torch.tensor(torch.randn(1, 1, 176, 224, 144, device='cuda')).float()
+    torch.onnx.export(model, dummy_input, "exported_model.onnx", verbose=True, input_names=["encoder.layers.0.blocks.0.conv1.norm1"], output_names=["final_convolution"])
 
 
     # criterion = load_criterion(criterion_name, n_gpus=n_gpus)
