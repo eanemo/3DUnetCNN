@@ -36,7 +36,7 @@ def convert(args):
     model = build_or_load_model(model_name=model_name, model_filename=args.model_filename, n_outputs=num_outputs,
                                 n_features=n_features, n_gpus=args.gpus, strict=True, **model_kwargs)
 
-    onnx_model = keras2onnx.convert_keras(model, model.name)
+    onnx_model = keras2onnx.convert_keras(model, model_name)
     keras2onnx.save_model(onnx_model, args.output)
     #torch.onnx.export(model, dummy_input, "model.onnx", verbose=True, input_names=[
     #                  args.input], output_names=[args.output])
