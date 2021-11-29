@@ -6,8 +6,12 @@ from unet3d.models.pytorch.build import build_or_load_model
 
 
 def convert(args):
+    # Modelo anterior
+    #dummy_input = torch.tensor(torch.randn(
+    #    2, 1, 96, 96, 96, device='cuda')).float()
+    # Modelo nuevo
     dummy_input = torch.tensor(torch.randn(
-        2, 1, 96, 96, 96, device='cuda')).float()
+        1, 1, 176, 224, 144, device='cuda')).float()
     fp_json = open(args.config)
     config = json.load(fp=fp_json)      # Devuelve un diccionario
     model_name = config['model_name']
