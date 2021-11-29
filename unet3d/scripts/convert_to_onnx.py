@@ -24,6 +24,13 @@ def convert(args):
         num_outputs = len(np.concatenate(config['metric_names']))
 
     model_kwargs = config['model_kwargs']
+    
+    if args.debug:
+        print("model_name:", model_name)
+        print("model_filename:", args.model_filename)
+        print("num_outputs:", num_outputs)
+        print("n_features:", n_features)
+        print("model_kwargs:", model_kwargs)
 
     model = build_or_load_model(model_name=model_name, model_filename=args.model_filename, n_outputs=num_outputs,
                                 n_features=n_features, n_gpus=1, strict=True, **model_kwargs)
@@ -42,6 +49,10 @@ if __name__ == "__main__":
                         help="Fichero que contiene el modelo convertido a formato ONNX", required=True)
     parser.add_argument("--input", type=str, help="Nombre del nodo de entrada de la red", required=False, default="module.encoder.layers.0.blocks.0.conv1.norm1")
     parser.add_argument("--output", type=str, help="Nombre del nodo de salida de la red", required=False, default="module.final_convolution")
+    parser.add_argument("--debug", type=bool, action="store_true")
 
     args = parser.parse_args()
+    
+    if args.debug:
+        print(args)
     convert(args)
