@@ -13,6 +13,7 @@ from .utils.hcp import new_cifti_scalar_like, get_metric_data
 from .utils.filenames import generate_hcp_filenames, load_subject_ids
 from .utils.augment import generate_permutation_keys, permute_data, reverse_permute_data
 
+import torch
 
 def predict_data_loader(model, data_loader):
     import torch
@@ -455,6 +456,12 @@ def pytorch_volumetric_predictions(model_filename, model_name, n_features, filen
                                                                  n_features, strict_model_loading, n_gpus, sequence,
                                                                  sequence_kwargs, filenames, window, spacing,
                                                                  metric_names)
+    
+    print("Converting model to onnx ...")
+    dummy_input = torch.tensor(torch.randn(1, 1, 176, 224, 144, device='cuda')).float()
+    torch.onnx.export(model, dummy_input, "exported_model.onnx", verbose=True, input_names=[
+                      args.input], output_names=[args.output])
+
 
     # criterion = load_criterion(criterion_name, n_gpus=n_gpus)
     results = list()
