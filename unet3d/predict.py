@@ -297,6 +297,13 @@ def pytorch_whole_brain_scalar_predictions(model_filename, model_name, n_outputs
 
 def load_volumetric_model(model_name, model_filename, n_outputs, n_features, n_gpus, strict, **kwargs):
     from unet3d.models.pytorch.build import build_or_load_model
+    print("model_name:", model_name)
+    print("model_filename:", model_filename)
+    print("n_outputs:", n_outputs)
+    print("n_features:", n_features)
+    print("n_gpus:", n_gpus)
+    print("strict:", strict)
+    print(kwargs)
     model = build_or_load_model(model_name=model_name, model_filename=model_filename, n_outputs=n_outputs,
                                 n_features=n_features, n_gpus=n_gpus, strict=strict, **kwargs)
     model.eval()
@@ -407,6 +414,7 @@ def predict_volumetric_batch(model, batch, batch_references, batch_subjects, bat
                              segmentation_labels, sum_then_threshold, label_hierarchy, write_input_image=False):
     pred_x = pytorch_predict_batch_array(model, batch, n_gpus=n_gpus)
     for batch_idx in range(len(batch)):
+        # Mostramos los valores a predecir
         pred_image = prediction_to_image(pred_x[batch_idx].squeeze(), input_image=batch_references[batch_idx][0],
                                          reference_image=batch_references[batch_idx][1], interpolation=interpolation,
                                          segmentation=segmentation, segmentation_labels=segmentation_labels,
