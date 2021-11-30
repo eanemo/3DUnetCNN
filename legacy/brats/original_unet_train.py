@@ -65,9 +65,11 @@ def main(overwrite=False):
     data_file_opened = open_data_file(config["data_file"])
 
     if not overwrite and os.path.exists(config["model_file"]):
+        print('config["model_file"]:', config["model_file"])
         model = load_old_model(config["model_file"])
     else:
         # instantiate new model
+        print("Creating new input shape:", config["input_shape"])
         model = unet_model_3d(input_shape=config["input_shape"],
                               pool_size=config["pool_size"],
                               n_labels=config["n_labels"],
