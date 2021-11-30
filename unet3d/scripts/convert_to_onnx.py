@@ -37,7 +37,7 @@ def convert(args):
                                 n_features=n_features, n_gpus=args.gpus, strict=True, **model_kwargs)
     
     torch.onnx.export(model, dummy_input, args.converted_filename, verbose=True, input_names=[
-                      args.input], output_names=[args.output])
+                      args.input], output_names=[args.output], opset_version=11)
 
 
 if __name__ == "__main__":
