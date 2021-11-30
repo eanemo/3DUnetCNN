@@ -125,6 +125,7 @@ class VariationalAutoEncoder(ConvolutionalAutoEncoder):
                                                      decoder_mirrors_encoder=decoder_mirrors_encoder,
                                                      activation=activation,
                                                      use_transposed_convolutions=use_transposed_convolutions)
+        print("VariationalAutoEncoder input_shape", input_shape)
         if vae_features is not None:
             depth = len(encoder_blocks) - 1
             n_latent_feature_maps = base_width * (feature_dilation ** depth)
