@@ -61,6 +61,7 @@ def run_pytorch_training(config, model_filename, training_log_filename, verbose=
     else:
         model_kwargs = dict()
 
+    print("model_kwargs:", model_kwargs)
     model = build_or_load_model(model_name, model_filename, n_features=config["n_features"], n_outputs=n_outputs,
                                 freeze_bias=in_config("freeze_bias", config, False),
                                 bias=bias, n_gpus=n_gpus, **model_kwargs)
