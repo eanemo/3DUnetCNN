@@ -8,3 +8,5 @@ opencv-python==4.5.3.56
 Keras==2.4.3
 tensorflow==2.4.4
 torch==1.10.0
+SimpleITK==2.1.1
+tqdm==4.62.3
