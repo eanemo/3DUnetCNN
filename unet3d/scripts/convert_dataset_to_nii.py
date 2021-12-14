@@ -6,6 +6,7 @@ import argparse
 from tqdm import tqdm
 import numpy as np
 import cv2
+import hashlib
 
 
 def create_dcm_from_mat(mat : np.array, filename : str):
@@ -48,6 +49,8 @@ def main(args):
         for case in cases:
             if isdir(case):
                 base_dir = basename(case)
+                output_case = hashlib.sha256(
+                    base_dir.encode('utf-8')).hexdigest()
                 # Previamente necesitamos transformar las matrices de OpenCV a ficheros DICOM compatibles con SimpleITK
                 input_original_xml = sorted(
                     glob.glob(join(case, "*_original_*.xml")))
@@ -58,15 +61,15 @@ def main(args):
                 input_files = sorted(glob.glob(join(case, "*_cut_*.png")))
                 input_segmentation = sorted(
                     glob.glob(join(case, "*_segmentation_*.png")))
-                output_nii = join(target_dir, base_dir + "_cut.nii.gz")
+                output_nii = join(target_dir, output_case + "_cut.nii.gz")
                 segmentation_nii = join(
-                    target_dir, base_dir + "_segmentation.nii.gz")
+                    target_dir, output_case + "_segmentation.nii.gz")
                 original_nii = join(
-                    target_dir, base_dir + "_original.nii.gz"
+                    target_dir, output_case + "_original.nii.gz"
                 )
-                createVol(input_files, output_nii)
+                #createVol(input_files, output_nii)
                 createVol(input_segmentation, segmentation_nii)
-                #createVol(input_original_dcm, original_nii)
+                createVol(input_original_dcm, original_nii)
                 pbar.update(1)
                 pbar.set_description(case)
         pbar.close()
