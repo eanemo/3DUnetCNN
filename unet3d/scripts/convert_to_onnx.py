@@ -3,7 +3,6 @@ import argparse
 import json
 import numpy as np
 from unet3d.models.pytorch.build import build_or_load_model
-import keras2onnx
 
 
 def convert(args):
