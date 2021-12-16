@@ -54,7 +54,12 @@ def main(args):
                 # Previamente necesitamos transformar las matrices de OpenCV a ficheros DICOM compatibles con SimpleITK
                 input_original_xml = sorted(
                     glob.glob(join(case, "*_original_*.xml")))
-                convert_mat_to_dicom(input_original_xml)
+                if args.use_original:
+                    if (len(input_original_xml) > 0):
+                        convert_mat_to_dicom(input_original_xml)
+                    else:
+                        print("No existen ficheros con los valores Hounsfiel para el caso", dir + "/" + base_dir)
+                        exit(-1)
                 input_original_dcm = sorted(
                     glob.glob(join(case, "*_original_*.dcm")))
                 # Es un directorio y por tanto un caso
@@ -67,11 +72,16 @@ def main(args):
                 original_nii = join(
                     target_dir, output_case + "_original.nii.gz"
                 )
-                #createVol(input_files, output_nii)
+                createVol(input_files, output_nii)
                 createVol(input_segmentation, segmentation_nii)
-                createVol(input_original_dcm, original_nii)
+
+                if args.use_original:
+                    if (len(original_nii) > 0):
+                        createVol(input_original_dcm, original_nii)
+                    else:
+                        print("No existen ficheros con los valores Hounsfiel para el caso", dir + "/" + base_dir)
                 pbar.update(1)
-                pbar.set_description(case)
+                pbar.set_description(dir + "/" + base_dir)
         pbar.close()
 
 
@@ -84,6 +94,7 @@ if __name__ == "__main__":
                         help='Directorio dónde vamos a escribir el dataset modificado en formato NII')
     parser.add_argument('--verbose', dest='verbose',
                         action='store_true', help="Mostrar informacion del proceso")
+    parser.add_argument('--use_original', action="store_true", help="Usa los ficheros originales (Hounsfield) para generar los ficheros Nifti.")
     parser.set_defaults(verbose=False)
     args = parser.parse_args()
     main(args)
