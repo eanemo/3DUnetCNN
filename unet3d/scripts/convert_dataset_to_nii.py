@@ -72,8 +72,10 @@ def main(args):
                 original_nii = join(
                     target_dir, output_case + "_original.nii.gz"
                 )
-                createVol(input_files, output_nii)
-                createVol(input_segmentation, segmentation_nii)
+
+                if len(input_files) > 0 and len(input_segmentation) > 0:
+                    createVol(input_files, output_nii)
+                    createVol(input_segmentation, segmentation_nii)
 
                 if args.use_original:
                     if (len(original_nii) > 0):
