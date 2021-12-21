@@ -4,10 +4,10 @@
   "generate_filenames_kwargs": {
     "directory": "",
     "feature_templates": [
-      "train/{subject}_cut.nii.gz"
+      "{subject}_cut.nii.gz"
     ],
     "target_templates": [
-      "train/{subject}_segmentation.nii.gz"
+      "{subject}_segmentation.nii.gz"
     ]
   },
   "window": [
