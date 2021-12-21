@@ -1,5 +1,5 @@
 {
-  "subjects_filename": "examples/teeth2021/subjects.json",
+  "subjects_filename": "examples/teeth2021/final_subjects.json",
   "generate_filenames": "templates",
   "generate_filenames_kwargs": {
     "directory": "",
